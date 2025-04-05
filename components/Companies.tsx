@@ -82,10 +82,7 @@ const Companies: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Product Showcase</h1>
-      
-      <div className="max-w-4xl mx-auto my-10">
+      <div className="w-full p-8 mt-8">
         <Courasel
           data={data}
           autoplaySpeed={4000}
@@ -93,7 +90,6 @@ const Companies: React.FC = () => {
           showArrows={true}
         />
       </div>
-    </div>
   );
 };
 

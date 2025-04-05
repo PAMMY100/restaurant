@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import logo from '@/public/assets/icons/nav-Icon.svg';
+import logo from '@/public/assets/icons/rLogo.svg';
 import hpImage from '@/public/assets/images/hpImage.png';
 import search from '@/public/assets/icons/search.svg'
 import Navbar from '@/components/Navbar';
