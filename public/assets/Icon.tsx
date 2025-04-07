@@ -7,6 +7,7 @@ import minus from "@/public/assets/icons/minus.svg";
 import arrLeft from "@/public/assets/icons/arrLeft.svg";
 import arrRight from "@/public/assets/icons/arrRight.svg";
 import search from "@/public/assets/icons/search.svg";
+import checker from "@/public/assets/icons/checker.svg"
 
 export {
   lodha,
@@ -17,5 +18,6 @@ export {
   minus,
   arrLeft,
   arrRight,
-  search
+  search,
+  checker
 }
