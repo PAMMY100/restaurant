@@ -11,7 +11,7 @@ function Filter() {
     <div className="w-[95%] h-[312px] rounded-[45px] flex gap-3 justify-around items-center text-[22px] font-bold text-[#545454] bg-[#F9F9F9] shadow-lg p-5 mx-auto">
       <div className="flex flex-col">
         <div className="flex gap-2 items-center">
-          <input type="text" placeholder="Search, Property, Name, Locality, Developer" className="w-[903px] h-[82px] rounded-[42.5px] bg-[#F9F9F9] p-4 outline-none focus:outline-0 shadow-inner"/>
+          <input type="text" placeholder="Search, Property, Name, Locality, Developer" className="w-[903px] h-[82px] rounded-[42.5px] bg-[#F9F9F9] p-4 outline-none focus:outline-0 shadow-[inset_0_-3px_6px_rgba(0,0,0,0.1)] "/>
           <div className="flex gap-2 items-center">
             <span>Bedrooms</span>
             <div className="flex justify-between items-center w-[273.99px] h-[82.88px] rounded-[42.5px] bg-[#F9F9F9] shadow-inner">

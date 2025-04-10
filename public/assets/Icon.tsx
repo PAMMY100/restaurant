@@ -8,6 +8,12 @@ import arrLeft from "@/public/assets/icons/arrLeft.svg";
 import arrRight from "@/public/assets/icons/arrRight.svg";
 import search from "@/public/assets/icons/search.svg";
 import checker from "@/public/assets/icons/checker.svg"
+import lodhaMiracle from "@/public/assets/images/lodhaMiracles.png";
+import greece from "@/public/assets/images/greece.jpg";
+import uk from "@/public/assets/images/uk.jpg";
+import usa from "@/public/assets/images/usa.jpg";
+import monaco from "@/public/assets/images/monaco.jpg";
+ 
 
 export {
   lodha,
@@ -19,5 +25,10 @@ export {
   arrLeft,
   arrRight,
   search,
-  checker
+  checker,
+  lodhaMiracle,
+  greece,
+  uk,
+  usa,
+  monaco
 }

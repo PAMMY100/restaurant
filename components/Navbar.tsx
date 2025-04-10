@@ -7,17 +7,14 @@ import Image from "next/image";
 
 
 const Navbar = () => {
-  const [home, setHome] = useState('');
-  const [project, setProject] = useState('');
-  const [localities, setLocalities] = useState('');
-  const [developer, setDelevolper] = useState('');
+ 
   const pathName = usePathname()
 
   return (
     <div className="mt-5">
       <nav className="flex justify-between gap-1">
         <ul className="flex w-[80%] justify-around items-center text-montserrat text-[22px]">
-          <li className={pathName === '/' || home === 'home' ? `w-[162px] p-4 h-[65px] rounded-[15px] text-center shadow-[6px_6px_10px_rgba(0,0,0,0.1),_-6px_-6px_10px_rgba(255,255,255,0.7)] bg-[#F9F9F9]` : ''} onClick={() => setHome('home')}>
+          <li className={pathName === '/' ? `w-[162px] p-4 h-[65px] rounded-[15px] text-center shadow-[6px_6px_10px_rgba(0,0,0,0.1),_-6px_-6px_10px_rgba(255,255,255,0.7)] bg-[#F9F9F9]` : ''}>
             <Link href='/' className="font-bold text-[#12B7B6]">Home</Link>
           </li>
           <li>

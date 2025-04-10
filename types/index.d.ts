@@ -6,3 +6,12 @@ declare type CompanyData = {
   project: string;
 }
 
+declare type AdvertData = {
+  id: number;
+  name: string;
+  agent: string;
+  image: StaticImageData;
+  location: string;
+  price: string;
+}
+
