@@ -1,6 +1,8 @@
+import AdvertArea from '@/components/AdvertArea'
 import Companies from '@/components/Companies'
 import Filter from '@/components/Filter'
 import Hero from '@/components/Hero'
+import Steps from '@/components/Steps'
 import React from 'react'
 
 const Home = () => {
@@ -9,6 +11,8 @@ const Home = () => {
         <Hero />
         <Companies />
         <Filter />
+        <AdvertArea />
+        <Steps />
     </div>
   )
 }
