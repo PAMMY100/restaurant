@@ -13,7 +13,7 @@ import greece from "@/public/assets/images/greece.jpg";
 import uk from "@/public/assets/images/uk.jpg";
 import usa from "@/public/assets/images/usa.jpg";
 import monaco from "@/public/assets/images/monaco.jpg";
- 
+ import bridgeImg from "@/public/assets/images/bridgeImg.png"
 
 export {
   lodha,
@@ -30,5 +30,6 @@ export {
   greece,
   uk,
   usa,
-  monaco
+  monaco,
+  bridgeImg
 }

@@ -15,3 +15,8 @@ declare type AdvertData = {
   price: string;
 }
 
+declare type cardAdvert = {
+  name: string;
+  desc: string;
+  img: StaticImageData;
+}
