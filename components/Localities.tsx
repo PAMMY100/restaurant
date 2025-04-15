@@ -35,7 +35,7 @@ const Localities = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const random = Math.floor(Math.random() * cardAdvert.length);
+      const random = Math.floor(Math.random() * cardAdvert.length + 1);
       swiperRef?.slideToLoop(random);
     }, 3000)
     return () => {
