@@ -1,9 +1,11 @@
+import About from '@/components/About'
 import AdvertArea from '@/components/AdvertArea'
 import Companies from '@/components/Companies'
 import Filter from '@/components/Filter'
 import Hero from '@/components/Hero'
 import Localities from '@/components/Localities'
 import Steps from '@/components/Steps'
+import Whatwedo from '@/components/Whatwedo'
 import React from 'react'
 
 const Home = () => {
@@ -15,6 +17,8 @@ const Home = () => {
         <AdvertArea />
         <Steps />
         <Localities />
+        <About/>
+        <Whatwedo />
     </div>
   )
 }

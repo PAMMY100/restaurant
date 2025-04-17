@@ -15,6 +15,11 @@ import usa from "@/public/assets/images/usa.jpg";
 import monaco from "@/public/assets/images/monaco.jpg";
  import bridgeImg from "@/public/assets/images/bridgeImg.png"
  import aboutusBG from "@/public/assets/images/aboutusBG.png"
+import downarrow from "@/public/assets/icons/down-arrow.svg"
+import planning from '@/public/assets/icons/3dPlanning.svg'
+import webPlanning from '@/public/assets/icons/webPlatform.svg'
+import marketing from '@/public/assets/Icons/marketing.svg'
+import corp from "@/public/assets/images/corp.png"
 
 export {
   lodha,
@@ -33,5 +38,10 @@ export {
   usa,
   monaco,
   bridgeImg,
-  aboutusBG
+  aboutusBG,
+  downarrow,
+  planning,
+  webPlanning,
+  marketing,
+  corp
 }

@@ -45,10 +45,10 @@ const Localities = () => {
 
 
   return (
-    <div >
-      <div>
-        <h1>Localities</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora molestiae perspiciatis doloribus distinctio temporibus</p>
+    <div className='mt-32'>
+      <div className='p-10'>
+        <h1 className='text-[56px]'>Localities</h1>
+        <p className='text-[20px] leading-11 w-[800px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora molestiae perspiciatis doloribus distinctio temporibus</p>
       </div>
       <div className='mt-10'>
       <Swiper
