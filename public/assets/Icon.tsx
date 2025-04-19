@@ -19,7 +19,10 @@ import downarrow from "@/public/assets/icons/down-arrow.svg"
 import planning from '@/public/assets/icons/3dPlanning.svg'
 import webPlanning from '@/public/assets/icons/webPlatform.svg'
 import marketing from '@/public/assets/Icons/marketing.svg'
-import corp from "@/public/assets/images/corp.png"
+import corp from "@/public/assets/images/corp.png";
+import footerImg from "@/public/assets/images/footerImg.png"
+import footerLogo from "@/public/assets/icons/footerLogo.svg"
+import footArr from "@/public/assets/icons/footArr.svg"
 
 export {
   lodha,
@@ -43,5 +46,8 @@ export {
   planning,
   webPlanning,
   marketing,
-  corp
+  corp,
+  footerImg,
+  footerLogo,
+  footArr
 }
