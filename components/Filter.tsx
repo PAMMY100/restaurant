@@ -4,8 +4,29 @@ import { Check } from "lucide-react";
 import { plus, minus, arrLeft, arrRight, search, checker } from "@/public/assets/Icon";
 import Image from "next/image";
 
+const types: string[] = ["Affordable", "Medium", "Luxury", "expensive"]
+const bedType: number[] = [1, 2, 3, 4]
+
 function Filter() {
   const [isOn, setIsOn] = useState(true)
+  const [current, setCurrent] = useState(0);
+  const [bedCurrent, setBedCurrent] = useState(0)
+
+  const handleNext = () => {
+    setCurrent((prev) => prev === types.length - 1 ? 0 : prev + 1);
+  }
+
+  const handlePrev = () => {
+    setCurrent((prev) => prev === 0 ? types.length - 1 : prev - 1);
+  }
+
+  const bedTypePrev = () => {
+    setBedCurrent((prev) => (prev - 1 + bedType.length) % bedType.length)
+  }
+
+  const bedTypeNext = () => {
+    setBedCurrent((prev) => (prev + 1) % bedType.length)
+  }
 
   return (
     <div className="w-[95%] h-[312px] rounded-[45px] flex gap-3 justify-around items-center text-[22px] font-bold text-[#545454] bg-[#F9F9F9] shadow-lg p-5 mx-auto">
@@ -15,9 +36,9 @@ function Filter() {
           <div className="flex gap-2 items-center">
             <span>Bedrooms</span>
             <div className="flex justify-between items-center w-[273.99px] h-[82.88px] rounded-[42.5px] bg-[#F9F9F9] shadow-inner">
-              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center"><Image src={minus} alt="minus icon"/></div>
-              <span>2</span>
-              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center"><Image src={plus} alt="plus icon"/></div>
+              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center" onClick={bedTypePrev}><Image src={minus} alt="minus icon"/></div>
+              <span>{bedType[bedCurrent]}</span>
+              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center" onClick={bedTypeNext}><Image src={plus} alt="plus icon"/></div>
             </div>
           </div>
         </div>
@@ -25,9 +46,9 @@ function Filter() {
           <div className="flex justify-around space-x-12 gap-2 items-center">
             <span>Price Segment</span>
             <div className="w-[361.74px] h-[82.88px] rounded-[42.5px] bg-[#F9F9F9] flex justify-between items-center shadow-inner">
-              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center"><Image src={arrLeft} alt="arrow left Icon"/></div>
-              <span>Affordable</span>
-              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center"><Image src={arrRight} alt="arrow right Icon"/></div>
+              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center cursor-pointer" onClick={handlePrev}><Image src={arrLeft} alt="arrow left Icon"/></div>
+              <span>{types[current]}</span>
+              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center cursor" onClick={handleNext}><Image src={arrRight} alt="arrow right Icon"/></div>
             </div>
             <div className="flex gap-3 items-center">
               <span>Ready to Move</span>
