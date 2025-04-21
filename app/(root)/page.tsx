@@ -13,7 +13,7 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div className='min-h-screen p-3 space-y-4'>
+    <div className='min-h-screen p-3'>
         <Hero />
         <Companies />
         <Filter />

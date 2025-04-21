@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 import { plus, minus, arrLeft, arrRight, search, checker } from "@/public/assets/Icon";
 import Image from "next/image";
 
-const types: string[] = ["Affordable", "Medium", "Luxury", "expensive"]
+const types: string[] = ["Affordable", "Medium", "Luxury", "Expensive"]
 const bedType: number[] = [1, 2, 3, 4]
 
 function Filter() {
@@ -36,9 +36,9 @@ function Filter() {
           <div className="flex gap-2 items-center">
             <span>Bedrooms</span>
             <div className="flex justify-between items-center w-[273.99px] h-[82.88px] rounded-[42.5px] bg-[#F9F9F9] shadow-inner">
-              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center" onClick={bedTypePrev}><Image src={minus} alt="minus icon"/></div>
+              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center cursor-pointer" onClick={bedTypePrev}><Image src={minus} alt="minus icon"/></div>
               <span>{bedType[bedCurrent]}</span>
-              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center" onClick={bedTypeNext}><Image src={plus} alt="plus icon"/></div>
+              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center cursor-pointer" onClick={bedTypeNext}><Image src={plus} alt="plus icon"/></div>
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@ function Filter() {
             <div className="w-[361.74px] h-[82.88px] rounded-[42.5px] bg-[#F9F9F9] flex justify-between items-center shadow-inner">
               <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center cursor-pointer" onClick={handlePrev}><Image src={arrLeft} alt="arrow left Icon"/></div>
               <span>{types[current]}</span>
-              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center cursor" onClick={handleNext}><Image src={arrRight} alt="arrow right Icon"/></div>
+              <div className="w-[76.05px] h-[76.05px] rounded-[166px] bg-[#F3F3F3] flex justify-center items-center cursor-pointer" onClick={handleNext}><Image src={arrRight} alt="arrow right Icon"/></div>
             </div>
             <div className="flex gap-3 items-center">
               <span>Ready to Move</span>

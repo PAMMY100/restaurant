@@ -22,7 +22,17 @@ import marketing from '@/public/assets/Icons/marketing.svg'
 import corp from "@/public/assets/images/corp.png";
 import footerImg from "@/public/assets/images/footerImg.png"
 import footerLogo from "@/public/assets/icons/footerLogo.svg"
-import footArr from "@/public/assets/icons/footArr.svg"
+import footArr from "@/public/assets/icons/footArr.svg";
+import logo from "@/public/assets/Icons/rLogo.svg"
+import abtHero from "@/public/assets/images/abtHero.png";
+import ethics from "@/public/assets/Icons/ethics.svg";
+import innovation from "@/public/assets/Icons/Innovation.svg";
+import collaboration from "@/public/assets/icons/collaboration.svg";
+import quality from "@/public/assets/icons/quality&comfort.svg";
+import sustainibility from "@/public/assets/icons/sustainability.svg";
+import vision from "@/public/assets/icons/vision.svg";
+import mission from "@/public/assets/icons/mission.svg";
+import goal from "@/public/assets/icons/goal.svg"
 
 export {
   lodha,
@@ -49,5 +59,15 @@ export {
   corp,
   footerImg,
   footerLogo,
-  footArr
+  footArr,
+  logo,
+  abtHero,
+  ethics,
+  innovation,
+  collaboration,
+  quality,
+  sustainibility,
+  vision,
+  mission,
+  goal
 }
