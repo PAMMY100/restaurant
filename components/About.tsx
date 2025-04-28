@@ -5,7 +5,7 @@ import Image from 'next/image'
 const About = () => {
 
   return (
-    <div className='flex relative h-[800px] w-full mt-28 text-white'>
+    <div className='flex relative h-[800px] w-full mt-28 text-white font-monts'>
       <Image src={aboutusBG} alt='white interior background' className='w-full h-full'/>
       <div className='absolute top-0 flex flex-col space-y-5 justify-around p-20 align-middle h-[800px] w-1/2 bg-[#1F1F1F] opacity-[80%]'>
         <h1 className='text-[56px]'>About Us</h1>
