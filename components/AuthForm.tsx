@@ -1,7 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { DefaultValues, FieldValues, SubmitHandler, useForm, UseFormReturn } from "react-hook-form"
+import { DefaultValues, FieldValues, Path, SubmitHandler, useForm, UseFormReturn } from "react-hook-form"
 import { z, ZodType } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { FIELD_TYPES } from "@/constants"
 
 
 interface Props<T extends FieldValues> {
@@ -49,24 +50,26 @@ const AuthForm = <T extends FieldValues> ({type, schema, defaultValues, onSubmit
         "Access the vast collection of beatuiful house accross the world!" :
         "Please complete all fields"}</p>
         <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="shadcn" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8 w-full">
+          {
+            Object.keys(defaultValues).map((field) => (
+              <FormField
+                key={field}
+                control={form.control}
+                name={field as Path<T>}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{field.name.charAt(0).toLocaleUpperCase() + field.name.slice(1)}</FormLabel>
+                    <FormControl>
+                      <Input required type={FIELD_TYPES[field.name as keyof typeof FIELD_TYPES]} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))
+          }
+          <Button type="submit">{isSignIn ? "Sign In" : "Sign Up"}</Button>
         </form>
       </Form>
       <p className="text-center text-base font-medium">
