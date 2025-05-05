@@ -6,7 +6,7 @@ import plus from "@/public/assets/icons/plus.svg";
 import minus from "@/public/assets/icons/minus.svg";
 import arrLeft from "@/public/assets/icons/arrLeft.svg";
 import arrRight from "@/public/assets/icons/arrRight.svg";
-import search from "@/public/assets/icons/search.svg";
+import searchIcon from "@/public/assets/icons/search.svg";
 import checker from "@/public/assets/icons/checker.svg"
 import lodhaMiracle from "@/public/assets/images/lodhaMiracles.jpg";
 import greece from "@/public/assets/images/greece.jpg";
@@ -43,7 +43,7 @@ export {
   minus,
   arrLeft,
   arrRight,
-  search,
+  searchIcon,
   checker,
   lodhaMiracle,
   greece,

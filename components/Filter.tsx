@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import { Check } from "lucide-react";
-import { plus, minus, arrLeft, arrRight, search, checker } from "@/public/assets/Icon";
+import { plus, minus, arrLeft, arrRight, searchIcon, checker } from "@/public/assets/Icon";
 import Image from "next/image";
 
 const types: string[] = ["Affordable", "Medium", "Luxury", "Expensive"]
@@ -73,7 +73,7 @@ function Filter() {
         </div>
       </div>
       <div className="w-[128.71px] h-[128.71px] rounded-full bg-[#F3F3F3] shadow-inner cursor-pointer flex justify-center items-center">
-        <Image src={search} alt="Search Icon" className="w-[47.32px] h-[51.76px] cursor-pointer"/>
+        <Image src={searchIcon} alt="Search Icon" className="w-[47.32px] h-[51.76px] cursor-pointer"/>
       </div>
     </div>
   )
