@@ -6,7 +6,6 @@ import plus from "@/public/assets/icons/plus.svg";
 import minus from "@/public/assets/icons/minus.svg";
 import arrLeft from "@/public/assets/icons/arrLeft.svg";
 import arrRight from "@/public/assets/icons/arrRight.svg";
-import searchIcon from "@/public/assets/icons/search.svg";
 import checker from "@/public/assets/icons/checker.svg"
 import lodhaMiracle from "@/public/assets/images/lodhaMiracles.jpg";
 import greece from "@/public/assets/images/greece.jpg";
@@ -33,6 +32,7 @@ import sustainibility from "@/public/assets/icons/sustainability.svg";
 import vision from "@/public/assets/icons/vision.svg";
 import mission from "@/public/assets/icons/mission.svg";
 import goal from "@/public/assets/icons/goal.svg"
+import searchIcon from "@/public/assets/icons/searchIcon.svg"
 
 export {
   lodha,
