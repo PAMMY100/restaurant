@@ -32,7 +32,6 @@ import sustainibility from "@/public/assets/icons/sustainability.svg";
 import vision from "@/public/assets/icons/vision.svg";
 import mission from "@/public/assets/icons/mission.svg";
 import goal from "@/public/assets/icons/goal.svg"
-import searchIcon from "@/public/assets/icons/searchIcon.svg"
 
 export {
   lodha,
@@ -43,7 +42,6 @@ export {
   minus,
   arrLeft,
   arrRight,
-  searchIcon,
   checker,
   lodhaMiracle,
   greece,
