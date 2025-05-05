@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import logo from '@/public/assets/icons/rLogo.svg';
 import hpImage from '@/public/assets/images/hpImage.png';
-import search from '@/public/assets/icons/search.svg'
+import searchIcon from "@/public/assets/icons/searchIcon.svg"
 import Navbar from '@/components/Navbar';
 
 const Hero = () => {
@@ -18,7 +18,7 @@ const Hero = () => {
         </div>
         <div className='flex w-[385px] h-[100px] bg-[#F9F9F9] p-7 justify-around align-middle rounded-[20px] shadow-lg'>
           <input type="text" placeholder='Search Properties' className='text-[#12B7B6] text-[26px] font-bold w-[246px] h-[29.1px] outline-none border-none' /> 
-          <Image src={search} alt='Search Icon' className='w-[22px] h-[26.5px] mt-1 cursor-pointer'/>
+          <Image src={searchIcon} alt='Search Icon' className='w-[22px] h-[26.5px] mt-1 cursor-pointer'/>
         </div>
       </div>
       <div className=' items-end'>
