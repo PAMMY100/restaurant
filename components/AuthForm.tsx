@@ -17,6 +17,9 @@ import {
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { FIELD_TYPES } from "@/constants"
+import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
+
 
 
 interface Props<T extends FieldValues> {
@@ -28,6 +31,7 @@ interface Props<T extends FieldValues> {
 
 const AuthForm = <T extends FieldValues> ({type, schema, defaultValues, onSubmit}: Props<T>) => {
 
+  const router = useRouter()
   const isSignIn = type === "SIGN_IN";
 
   //1. Define your form.
@@ -38,7 +42,14 @@ const AuthForm = <T extends FieldValues> ({type, schema, defaultValues, onSubmit
   })
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
-    console.log(data)
+    const result = await onSubmit(data);
+    if (result.success) {
+      toast.success(isSignIn ? "You have successfully signed in." : "You have successfully signed up.")
+
+      router.push('/');
+    } else {
+      toast.error(`Error ${isSignIn ? "signing in" : "signing up"}`)
+    }
   }
 
   return (

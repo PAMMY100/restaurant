@@ -20,3 +20,12 @@ declare type cardAdvert = {
   desc: string;
   img: StaticImageData;
 }
+
+
+interface AuthCredentials {
+  fullName: string;
+  email: string;
+  password: string;
+  phone: string;
+  address: string;
+}

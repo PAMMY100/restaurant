@@ -3,7 +3,7 @@ import { address } from "framer-motion/client";
 export const FIELD_NAMES = {
   fullName: "Full name",
   email: "Email",
-  phoneNo: "phoneNo",
+  phone: "phone",
   address: "address",
   password: "Password"
 }
@@ -11,7 +11,7 @@ export const FIELD_NAMES = {
 export const FIELD_TYPES = {
   fullName: "text",
   email: "email",
-  phoneNo: "number",
+  phone: "phone",
   address: "address",
   password: "password"
 }

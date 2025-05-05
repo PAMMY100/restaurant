@@ -8,6 +8,20 @@
       "when": 1746084214848,
       "tag": "0000_shiny_scrambler",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1746102293891,
+      "tag": "0001_legal_chronomancer",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1746102560706,
+      "tag": "0002_loose_alice",
+      "breakpoints": true
     }
   ]
 }
