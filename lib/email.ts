@@ -7,16 +7,36 @@ type EmailParams = {
   [key: string]: any;
 }
 
-export const sendEmail = async (templateId: string, params: EmailParams): Promise<{success: boolean; error?: string}> => {
+export const sendOnboardingEmail = async (params: EmailParams) => {
+
   try {
-    await emailjs.send(config.env.emaijs.serviceID!, templateId, params, config.env.emaijs.ejsPublicKey);
+    await emailjs.send(
+      config.env.emaijs.serviceID!,
+      config.env.emaijs.ejsOnboarding!,
+      params,
+      config.env.emaijs.ejsPublicKey!
+    )
     return {success: true};
-  } catch(error) {
-    console.error('Email sending error: ', error);
-    return {success: false, error: 'Failed to send email'}
+  } catch (error) {
+    console.error('Onboarding email error: ', error);
+    return {success: false, error: `Failed to send onboarding email`}
   }
+
 }
 
-export const sendOnboardingEmail = (params: EmailParams) => sendEmail(config.env.emaijs.ejsOnboarding!, params);
+export const sendInactivityEmail = async (params: EmailParams) => {
+  try {
+    await emailjs.send(
+      config.env.emaijs.serviceID!,
+      config.env.emaijs.ejsInactivity!,
+      params,
+      config.env.emaijs.ejsPublicKey!
+    )
 
-export const sendInactivityEmail = (params: EmailParams) => sendEmail(config.env.emaijs.ejsInactivity!, params)
+    return { success: true };
+
+  } catch (error) {
+    console.error('Inactivity email error: ', error);
+    return { success: false, error: 'Failed to send inactivity email'}
+  }
+}

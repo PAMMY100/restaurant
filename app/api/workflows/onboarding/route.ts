@@ -1,7 +1,9 @@
 import { serve } from "@upstash/workflow/nextjs";
-import emailjs from "@emailjs/browser"
-import config from "@/lib/config";
 import { db } from "@/database/drizzle";
+import { getInactiveUsers, updateUserActivity } from "@/lib/redis";
+import { sendInactivityEmail } from "@/lib/email";
+import { users } from "@/database/schema";
+import { and, eq, isNotNull } from "drizzle-orm";
 
 type InitialData = {
   email: string;
@@ -9,61 +11,34 @@ type InitialData = {
 }
 
 export const { POST } = serve<InitialData> (async (context) => {
-  const { email, name } = context.requestPayload;
 
-  emailjs.init(config.env.emaijs.ejsPublicKey!)
+  const inactiveUsers = await context.run("get-inactive-users", async () => {
+    return await getInactiveUsers(14)
+  })
 
-  await context.run("new-signup", async () => {
-    await sendEmail({
-      templateId: config.env.emaijs.ejsOnboarding!,
-      email,
-      name,
-      templateParams: {
-        to_name: name,
-        to_email: email,
-        welcome_message: "Thanks for joining our platform!"
-      }
-    });
-  });
-  
-  await context.sleep("wait-for-3-days", 60 * 60 * 24 * 3);
+  for (const {userId, data} of inactiveUsers) {
+      await context.run(`send-reminder-${userId}`, async () => {
+        try {
+          const { success } = await sendInactivityEmail({
+            to_name: data.name,
+            to_email: data.email,
+            inactive_days: "14",
+            reactivation_link: `${process.env.NEXTAUTH_URL}/login`
+          });
 
-  while (true) {
-    const state = await context.run("check-user-state", async () => {
-      return await getUserState(email);;
-    })
-
-    if (state === "non-active") {
-      await context.run("send-email-non-active", async () => {
-        await sendEmail({
-          templateId: config.env.emaijs.ejsInactivity!,
-          email,
-          name,
-          templateParams: {
-            to_name: name,
-            to_email: email,
-            inactivite_days: "3",
+          if (success) {
+            await updateUserActivity(userId, {reminderSent: true});
           }
-        });
-      })
-    } else if (state === "active") {
-      await context.run("send-email-active", async () => {
-        await sendEmail({
-          templateId: "",
-          email,
-          name,
-          templateParams: {
-            to_name: name,
-            to_email: email,
-            newsletter_content: "Here's what's new this month..."
-          }
-        });
+        } catch (error) {
+          console.log(`Error processing user ${userId}: ${error}`)
+        }
       });
-    }
-
-    await context.sleep("wait-for-1-month", 60 * 60 * 24 * 30)
   }
+
+  return { processed: inactiveUsers.length }
 })
+
+// Helper function to get user state (used in your original workflow)
 
 type EmailParams = {
   templateId: string;
@@ -72,25 +47,25 @@ type EmailParams = {
   templateParams: Record<string, string>
 }
 
-async function sendEmail(params: EmailParams) {
-  //implement email sending logic here
-  try {
-    const response = await emailjs.send(
-      config.env.emaijs.serviceID!,
-      params.templateId,
-      params.templateParams,
-      config.env.emaijs.ejsPublicKey!
-    )
-    console.log(`Email sent to ${params.email}`, response)
-  } catch (error) {
-    console.log(`Failed to send email to ${params.email}`, error)
-  }
-}
-
 type UserState = "non-active" | "active";
 
 const getUserState = async(email: string) : Promise<UserState> => {
   //Implement user state logic here
-  const lastActive = await db
-  return "non-active";
+  const [user] = await db
+        .select()
+        .from(users)
+        .where(
+          and (
+            eq(users.email, email),
+            isNotNull(users.lastLogin)
+          )
+        )
+        .limit(1)
+        
+    if (!user?.lastLogin) return "non-active"
+
+    const daysInactive = (Date.now() - user.lastLogin.getTime()) / (86400 * 1000);
+    return daysInactive > 7 ? "non-active" : "active";
 }
+
+

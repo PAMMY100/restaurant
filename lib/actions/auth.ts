@@ -8,6 +8,8 @@ import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import ratelimit from "../ratelimit";
 import { redirect } from "next/navigation";
+import { updateUserActivity } from "../redis";
+import { sendOnboardingEmail } from "../email";
 
 
 export const signInWithCredentials = async (params: Pick<AuthCredentials, "email" | "password">) => {
@@ -30,7 +32,25 @@ export const signInWithCredentials = async (params: Pick<AuthCredentials, "email
       return {success: false, error: result.error}
     }
 
-    return {success: true};
+    const user = await db
+        .select()
+        .from(users)
+        .where(eq(users.email, email))
+        .limit(1)
+
+    if (user) {
+      await db.update(users)
+        .set({lastLogin: new Date() })
+        .where(eq(users.id, user[0].id))
+
+        await updateUserActivity(user[0].id, {
+          lastActive: new Date().toISOString(),
+          lastLogin: new Date().toISOString(),
+          reminderSent: false
+        })
+    }
+
+    return {success: true, userId: user[0]?.id};
 
   } catch (error) {
     console.log(error, "signin error");
@@ -60,18 +80,34 @@ export const signUp = async (params: AuthCredentials) => {
     const hashedPassword = await hash(password, 10);
 
     try {
-      await db.insert(users).values({
+      const [newUser] = await db.insert(users).values({
         fullName,
         email,
         address,
         phone,
         password: hashedPassword,
+        lastLogin: new Date(), //Set initial last login
+    }).returning();
+
+    await updateUserActivity(newUser.id, {
+      userId: newUser.id,
+      email,
+      name: fullName,
+      lastActive: new Date().toISOString(),
+      lastLogin: new Date().toISOString(),
+    })
+
+    await sendOnboardingEmail({
+      to_name: fullName,
+      to_email: email,
+      welcome_message: "Thanks for joining PerfectHome!"
     })
 
     await signInWithCredentials({email, password})
 
-      return { success: true }
+      return { success: true, userId: newUser.id }
     } catch(error) {
       console.log(error, "Signup error")
+      return { success: false, error: "Registration failed"};
     }
 }
