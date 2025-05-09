@@ -12,6 +12,7 @@ const config = {
     emaijs: {
       serviceID: process.env.EMAILJS_SERVICE_ID!,
       ejsPublicKey: process.env.EMAILJS_PUBLIC_KEY!,
+      ejsPrivateKey: process.env.EMAILJS_PRIVATE_KEY!,
       ejsOnboarding: process.env.EMAILJS_TEMPLATE_ID_ONBOARDING!,
       ejsInactivity: process.env.template_kr6d1zl!
 

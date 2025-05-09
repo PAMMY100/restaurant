@@ -1,4 +1,4 @@
-import emailjs from "@emailjs/browser"
+import emailjs from "@emailjs/nodejs"
 import config from "./config";
 
 type EmailParams = {
@@ -7,16 +7,23 @@ type EmailParams = {
   [key: string]: any;
 }
 
+emailjs.init({
+  publicKey: config.env.emaijs.ejsPublicKey!,
+  privateKey: config.env.emaijs.ejsPrivateKey!
+});
+
+
 export const sendOnboardingEmail = async (params: EmailParams) => {
 
   try {
-    await emailjs.send(
+    //Initialize with public key
+    const response = await emailjs.send(
       config.env.emaijs.serviceID!,
       config.env.emaijs.ejsOnboarding!,
       params,
-      config.env.emaijs.ejsPublicKey!
+    
     )
-    return {success: true};
+    return {success: true, response};
   } catch (error) {
     console.error('Onboarding email error: ', error);
     return {success: false, error: `Failed to send onboarding email`}
@@ -26,14 +33,13 @@ export const sendOnboardingEmail = async (params: EmailParams) => {
 
 export const sendInactivityEmail = async (params: EmailParams) => {
   try {
-    await emailjs.send(
+    const response = await emailjs.send(
       config.env.emaijs.serviceID!,
       config.env.emaijs.ejsInactivity!,
       params,
-      config.env.emaijs.ejsPublicKey!
     )
 
-    return { success: true };
+    return { success: true, response };
 
   } catch (error) {
     console.error('Inactivity email error: ', error);

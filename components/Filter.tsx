@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { plus, minus, arrLeft, arrRight, checker } from "@/public/assets/Icon";
+import searcIcon from "@/public/assets/icons/searchIcon.svg"
 import Image from "next/image";
 
 const types: string[] = ["Affordable", "Medium", "Luxury", "Expensive"]
@@ -73,7 +74,7 @@ function Filter() {
         </div>
       </div>
       <div className="w-[128.71px] h-[128.71px] rounded-full bg-[#F3F3F3] shadow-inner cursor-pointer flex justify-center items-center">
-        <Image src="" alt="Search Icon" className="w-[47.32px] h-[51.76px] cursor-pointer"/>
+        <Image src={searcIcon} alt="Search Icon" className="w-[47.32px] h-[51.76px] cursor-pointer"/>
       </div>
     </div>
   )

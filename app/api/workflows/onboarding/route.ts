@@ -10,15 +10,20 @@ type InitialData = {
   name: string;
 }
 
-export const { POST } = serve<InitialData> (async (context) => {
-
+export const { POST } = serve<InitialData>(async (context) => {
+  // Get potentially inactive users from Redis (14+ days since last activity)
   const inactiveUsers = await context.run("get-inactive-users", async () => {
-    return await getInactiveUsers(14)
-  })
+    return await getInactiveUsers(14);
+  });
 
-  for (const {userId, data} of inactiveUsers) {
-      await context.run(`send-reminder-${userId}`, async () => {
-        try {
+  // Process each user
+  for (const { userId, data } of inactiveUsers) {
+    await context.run(`send-reminder-${userId}`, async () => {
+      try {
+        // Double-check state using database
+        const state = await getUserState(data.email);
+        
+        if (state === "non-active") {
           const { success } = await sendInactivityEmail({
             to_name: data.name,
             to_email: data.email,
@@ -27,45 +32,37 @@ export const { POST } = serve<InitialData> (async (context) => {
           });
 
           if (success) {
-            await updateUserActivity(userId, {reminderSent: true});
+            await updateUserActivity(userId, { reminderSent: true });
+            console.log(`Reminder sent to ${data.email}`);
           }
-        } catch (error) {
-          console.log(`Error processing user ${userId}: ${error}`)
+        } else {
+          console.log(`User ${data.email} is now active, skipping reminder`);
         }
-      });
+      } catch (error) {
+        console.log(`Error processing user ${userId}: ${error}`);
+      }
+    });
   }
 
-  return { processed: inactiveUsers.length }
-})
-
-// Helper function to get user state (used in your original workflow)
-
-type EmailParams = {
-  templateId: string;
-  email: string;
-  name: string;
-  templateParams: Record<string, string>
-}
+  return { processed: inactiveUsers.length };
+});
 
 type UserState = "non-active" | "active";
 
-const getUserState = async(email: string) : Promise<UserState> => {
-  //Implement user state logic here
+const getUserState = async(email: string): Promise<UserState> => {
   const [user] = await db
-        .select()
-        .from(users)
-        .where(
-          and (
-            eq(users.email, email),
-            isNotNull(users.lastLogin)
-          )
-        )
-        .limit(1)
-        
-    if (!user?.lastLogin) return "non-active"
+    .select()
+    .from(users)
+    .where(
+      and(
+        eq(users.email, email),
+        isNotNull(users.lastLogin)
+      )
+    )
+    .limit(1);
+    
+  if (!user?.lastLogin) return "non-active";
 
-    const daysInactive = (Date.now() - user.lastLogin.getTime()) / (86400 * 1000);
-    return daysInactive > 7 ? "non-active" : "active";
-}
-
-
+  const daysInactive = (Date.now() - user.lastLogin.getTime()) / (86400 * 1000);
+  return daysInactive > 7 ? "non-active" : "active";
+};

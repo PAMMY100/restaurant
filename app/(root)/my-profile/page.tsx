@@ -1,21 +1,24 @@
+import React from 'react'
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
+import { signOut } from '@/auth';
+import { Button } from '@/components/ui/button';
 
 
-import { signOut } from "@/auth";
-import { redirect } from "next/navigation";
-import { Button } from "@/components/ui/button";
+async function page() {
 
-async function logoutAction() {
-  "use server";
-  await signOut();
-  redirect("/sign-in"); // must be used after await signOut()
-}
+  async function logout() {
+    'use server';
+    await signOut();
+    (await cookies()).delete('token');
+    redirect('/sign-in');
+  }
 
-export default function LogoutPage() {
-
-  
   return (
-    <form action={logoutAction} method="post">
-      <Button type="submit">Logout</Button>
+    <form action={logout}>
+      <Button type="submit" className='cursor-pointer'>Logout</Button>
     </form>
-  );
+  )
 }
+
+export default page;
