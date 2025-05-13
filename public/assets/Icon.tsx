@@ -32,6 +32,9 @@ import sustainibility from "@/public/assets/icons/sustainability.svg";
 import vision from "@/public/assets/icons/vision.svg";
 import mission from "@/public/assets/icons/mission.svg";
 import goal from "@/public/assets/icons/goal.svg"
+import trophy from "@/public/assets/icons/trophy.svg"
+import givingHand from "@/public/assets/icons/givingHand.svg"
+import team from "@/public/assets/icons/team.svg"
 
 export {
   lodha,
@@ -67,5 +70,8 @@ export {
   sustainibility,
   vision,
   mission,
-  goal
+  goal,
+  trophy,
+  team,
+  givingHand
 }

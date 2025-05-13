@@ -12,18 +12,18 @@ const layout = async ({children}: {children: ReactNode}) => {
   if (session) redirect('/')
 
   return (
-    <main>
-      <section>
-        <div>
-          <div className='flex flex-row gap-3'>
-            <Image src={logo} alt='logo' width={37} height={37}/>
-            <h1>PerfectHome</h1>
+    <main className='h-[100%] md:flex'>
+      <section className='w-full'>
+        <Image src={aboutusBG} alt='auth Ilustration' className='w-full h-full'/>
+      </section>
+      <section className='h-full w-full max-sm:rounded-t-[20%]'>
+        <div className='p-8'>
+          <div className='flex flex-row items-center gap-3'>
+            <Image src={logo} alt='logo' width={47} height={47}/>
+            <h1 className='text-3xl font-bold'>PerfectHome</h1>
           </div>
           <div>{children}</div>
         </div>
-      </section>
-      <section className='auth-illustration'>
-        <Image src={aboutusBG} alt='auth Ilustration' height={1000} width={1000}/>
       </section>
     </main>
   )

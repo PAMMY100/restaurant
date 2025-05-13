@@ -1,7 +1,7 @@
 import { serve } from "@upstash/workflow/nextjs";
 import { db } from "@/database/drizzle";
 import { getInactiveUsers, updateUserActivity } from "@/lib/redis";
-import { sendInactivityEmail } from "@/lib/email";
+import { sendInactivityEmail, sendOnboardingEmail } from "@/lib/email";
 import { users } from "@/database/schema";
 import { and, eq, isNotNull } from "drizzle-orm";
 
@@ -44,8 +44,33 @@ export const { POST } = serve<InitialData>(async (context) => {
     });
   }
 
-  return { processed: inactiveUsers.length };
+  // return { processed: inactiveUsers.length };
+  const onboardingUsers = await context.run("get-onboarding-users", async () => {
+    const allUsers = await getInactiveUsers(0) //pull all users
+    return allUsers.filter(({ data }) => data.onboardingPending === true)
+  });
+
+  for (const {userId, data} of onboardingUsers) {
+    await context.run(`send-oboarding-${userId}`, async () => {
+      try {
+        const { success } = await sendOnboardingEmail({
+          to_name: data.name,
+          to_email: data.email,
+          welcome_message: "Thanks for joining PerfectHome!",
+        });
+
+        if (success) {
+          await updateUserActivity(userId, { onboardingPending: false});
+          console.log(`Onboarding email sent to ${data.email}`);
+        }
+      } catch(error) {
+        console.error(`Failed to send onboarding email to ${data.email}: `, error);
+      }
+    })
+  }
+  return { processed: inactiveUsers.length + onboardingUsers.length }
 });
+
 
 type UserState = "non-active" | "active";
 

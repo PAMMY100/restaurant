@@ -19,8 +19,8 @@ import Link from "next/link"
 import { FIELD_TYPES } from "@/constants"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
-
-
+import emailjs from "emailjs-com"
+import config from "@/lib/config"
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
@@ -44,17 +44,43 @@ const AuthForm = <T extends FieldValues> ({type, schema, defaultValues, onSubmit
   const handleSubmit: SubmitHandler<T> = async (data) => {
     const result = await onSubmit(data);
     if (result.success) {
+
+      const { email, fullName } = data
+
+      try {
+        const emailParams = {
+          to_name: fullName,
+          to_email: email,
+        };
+
+        const response = await emailjs.send(
+          config.env.emaijs.serviceID,
+          config.env.emaijs.ejsOnboarding,
+          emailParams,
+          config.env.emaijs.ejsPublicKey
+        )
+
+        if (response.status === 200) {
+          console.log("Onboarding email sent successfully!")
+        } else {
+          console.log("Failed to send onboarding email.")
+        }
+      } catch (error) {
+        console.log("Error sending onboarding email.")
+      }
+
       toast.success(isSignIn ? "You have successfully signed in." : "You have successfully signed up.")
 
       router.push('/');
+
     } else {
       toast.error(`Error ${isSignIn ? "signing in" : "signing up"}`)
     }
   }
 
   return (
-    <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-semibold text-white">
+    <div className="flex flex-col gap-4 font-mono">
+        <h1 className="text-xl font-semibold mt-8">
           {isSignIn ? 'welcome back to PerfectHome' : 'Create your account'}
         </h1>
         <p>{isSignIn ?
@@ -80,7 +106,7 @@ const AuthForm = <T extends FieldValues> ({type, schema, defaultValues, onSubmit
               />
             ))
           }
-          <Button type="submit">{isSignIn ? "Sign In" : "Sign Up"}</Button>
+          <Button type="submit" className="w-[60%] h-[40px] bg-prim text-white text-xl max-sm:ml-[20%] cursor-pointer">{isSignIn ? "Sign In" : "Sign Up"}</Button>
         </form>
       </Form>
       <p className="text-center text-base font-medium">

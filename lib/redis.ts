@@ -8,6 +8,7 @@ export interface UserData extends Record<string, string | boolean | undefined> {
   lastLogin: string;
   onboardingSent?: boolean;
   reminderSent?: boolean;
+  onboardingPending?: boolean;
 }
 
 export const updateUserActivity = async (userId: string, data: Partial<UserData>) => {

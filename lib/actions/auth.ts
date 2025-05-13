@@ -9,7 +9,6 @@ import { headers } from "next/headers";
 import ratelimit from "../ratelimit";
 import { redirect } from "next/navigation";
 import { updateUserActivity } from "../redis";
-import { sendOnboardingEmail } from "../email";
 
 
 export const signInWithCredentials = async (params: Pick<AuthCredentials, "email" | "password">) => {
@@ -80,7 +79,9 @@ export const signUp = async (params: AuthCredentials) => {
     const hashedPassword = await hash(password, 10);
 
     try {
-      const [newUser] = await db.insert(users).values({
+      const [newUser] = await db
+      .insert(users)
+      .values({
         fullName,
         email,
         address,
@@ -95,12 +96,7 @@ export const signUp = async (params: AuthCredentials) => {
       name: fullName,
       lastActive: new Date().toISOString(),
       lastLogin: new Date().toISOString(),
-    })
-
-    await sendOnboardingEmail({
-      to_name: fullName,
-      to_email: email,
-      welcome_message: "Thanks for joining PerfectHome!"
+      onboardingPending: true
     })
 
     await signInWithCredentials({email, password})
