@@ -12,18 +12,18 @@ const obj: ObjectiveContent[] = [
   {img: team, details: "We believe in long term orientation with our diversified business model thus making us stand out in the industry"}
 ]
 
-const objectives = () => {
+const Objectives = () => {
 
   return (
-    <div>
-      <h1>Zeal's Objectives</h1>
-      <div>
+    <div className="mt-4 p-4">
+      <h1 className="text-[56px]">Zeal's Objectives</h1>
+      <div className="mt-16 flex flex-col justify-center gap-4">
         {obj.map((item) => (
-          <div>
-            <div>
-              <Image src={item.img} alt={`${item.img} icon`}/>
+          <div className="flex gap-10 justify-center items-center w-[80%]" key={item.details}>
+            <div className="w-[144px] h-[144px] rounded-[166px] bg-[#EDEDED] flex justify-center items-center shadow-inner">
+              <Image src={item.img} alt={`${item.img} icon`} width={84} height={77}/>
             </div>
-            <p>{item.details}</p>
+            <p className="w-[60%]">{item.details}</p>
           </div>
         ))}
       </div>
@@ -31,4 +31,4 @@ const objectives = () => {
   )
 }
 
-export default objectives
+export default Objectives

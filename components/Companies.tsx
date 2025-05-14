@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Courasel from './Courasel';
 import { lodha, prestige, brigade, sobha } from '@/public/assets/Icon';
+import ProductCard from './ProductCard';
 
 const data: CompanyData[] = [
   {
@@ -83,10 +84,9 @@ const Companies: React.FC = () => {
 
   return (
       <div className="w-full p-8 mt-8">
-        <Courasel
+        <ProductCard
           data={data}
           autoplaySpeed={4000}
-          showDots={true}
           showArrows={true}
         />
       </div>

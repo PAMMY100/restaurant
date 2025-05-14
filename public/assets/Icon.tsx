@@ -35,6 +35,13 @@ import goal from "@/public/assets/icons/goal.svg"
 import trophy from "@/public/assets/icons/trophy.svg"
 import givingHand from "@/public/assets/icons/givingHand.svg"
 import team from "@/public/assets/icons/team.svg"
+import coFounder from "@/public/assets/images/co-founder.avif"
+import designer from "@/public/assets/images/designer.avif"
+import developer from "@/public/assets/images/developer.avif"
+import cto from "@/public/assets/images/cto.avif"
+import founder from "@/public/assets/images/founder.webp"
+import accountant from "@/public/assets/images/accountant.webp"
+import architech from "@/public/assets/images/architect.avif"
 
 export {
   lodha,
@@ -73,5 +80,12 @@ export {
   goal,
   trophy,
   team,
-  givingHand
+  givingHand,
+  coFounder,
+  founder,
+  designer,
+  developer,
+  cto,
+  accountant,
+  architech
 }
